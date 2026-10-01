@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block title %}
+History · PocketSmart
+{% endblock %}
+
+{% block content %}
+
+<section class="planner-head">
+
+    <p class="eyebrow">
+        RECOMMENDATION HISTORY
+    </p>
+
+    <h1>
+        Your Recommendation History
+    </h1>
+
+    <p class="muted">
+        Review your previous budget plans
+        and recommendations.
+    </p>
+
+</section>
+
+
+<div class="history-grid">
+
+{% if history %}
+
+    {% for item in history %}
+
+    <div class="history-card">
+
+        <p class="eyebrow">
+            {{ item.category|upper }}
+        </p>
+
+        <h3>
+            ₹{{ "%.2f"|format(
+                item.input.budget or 0
+            ) }}
+        </h3>
+
+        <p>
+            {{ item.created_at[:19] }}
+        </p>
+
+
+        <a
+            class="btn small"
+            href="/recommendations/{{ item.id }}"
+        >
+            View Full Plan
+        </a>
+
+    </div>
+
+    {% endfor %}
+
+{% else %}
+
+    <div class="info">
+
+        <h3>
+            No recommendations yet.
+        </h3>
+
+        <p>
+            Create your first budget plan
+            from the dashboard.
+        </p>
+
+    </div>
+
+{% endif %}
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+
+{% block title %}
+Jewelry Planner · PocketSmart
+{% endblock %}
+
+{% block content %}
+
+<section class="planner-head">
+
+    <p class="eyebrow">
+        JEWELRY BUDGET PLANNER
+    </p>
+
+    <h1>
+        Find Jewelry That Matches
+    </h1>
+
+    <p class="muted">
+        Add your budget, occasion,
+        style and optionally upload
+        your outfit.
+    </p>
+
+</section>
+
+
+<div class="form-card">
+
+    {% if error %}
+
+    <div class="error">
+        {{ error }}
+    </div>
+
+    {% endif %}
+
+
+    <form
+        method="post"
+        action="/generate-jewelry"
+        enctype="multipart/form-data"
+    >
+
+        <label>
+            Jewelry Budget ₹
+
+            <input
+                type="number"
+                name="budget"
+                min="1"
+                required
+                placeholder="25000"
+            >
+
+        </label>
+
+
+        <label>
+            Occasion
+
+            <select name="occasion">
+
+                <option>
+                    Wedding
+                </option>
+
+                <option>
+                    Engagement
+                </option>
+
+                <option>
+                    Party
+                </option>
+
+                <option>
+                    Birthday
+                </option>
+
+                <option>
+                    Office
+                </option>
+
+                <option>
+                    Festival
+                </option>
+
+                <option>
+                    Casual
+                </option>
+
+            </select>
+
+        </label>
+
+
+        <label>
+            Style Preferences
+
+            <textarea
+                name="preferences"
+                required
+                placeholder="Elegant, traditional, minimal, gold tone..."
+            ></textarea>
+
+        </label>
+
+
+        <label>
+            Upload Outfit Image
+
+            <input
+                type="file"
+                name="image"
+                accept=".jpg,.jpeg,.png,.webp,image/*"
+            >
+
+        </label>
+
+
+        <p class="muted">
+            Optional. Maximum size: 8 MB.
+        </p>
+
+
+        <button
+            class="btn full"
+            type="submit"
+        >
+            Get Recommendations ✦
+        </button>
+
+    </form>
+
+</div>
+
+{% endblock %}

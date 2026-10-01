@@ -1,0 +1,166 @@
+{% extends "base.html" %}
+
+{% block title %}
+Home Planner · PocketSmart
+{% endblock %}
+
+{% block content %}
+
+<section class="planner-head">
+
+    <p class="eyebrow">
+        HOME INTERIOR PLANNER
+    </p>
+
+    <h1>
+        Create Your Home Budget Plan
+    </h1>
+
+    <p class="muted">
+        Tell us your budget and requirements.
+        AI will create a practical plan.
+    </p>
+
+</section>
+
+
+<div class="form-card">
+
+    {% if error %}
+
+    <div class="error">
+        {{ error }}
+    </div>
+
+    {% endif %}
+
+
+    <form
+        method="post"
+        action="/generate-home"
+    >
+
+        <div class="field-grid">
+
+            <label>
+                Total Budget ₹
+
+                <input
+                    type="number"
+                    name="budget"
+                    min="1"
+                    step="1"
+                    required
+                    placeholder="100000"
+                >
+
+            </label>
+
+
+            <label>
+                Room Type
+
+                <select name="room_type">
+
+                    <option>
+                        Living Room
+                    </option>
+
+                    <option>
+                        Bedroom
+                    </option>
+
+                    <option>
+                        Kitchen
+                    </option>
+
+                    <option>
+                        Dining Room
+                    </option>
+
+                    <option>
+                        Full Home
+                    </option>
+
+                </select>
+
+            </label>
+
+
+            <label>
+                Number of Lights
+
+                <input
+                    type="number"
+                    name="lights"
+                    min="0"
+                    value="2"
+                >
+
+            </label>
+
+
+            <label>
+                Number of Ceiling Fans
+
+                <input
+                    type="number"
+                    name="fans"
+                    min="0"
+                    value="1"
+                >
+
+            </label>
+
+
+            <label>
+                Number of Furniture Items
+
+                <input
+                    type="number"
+                    name="furniture"
+                    min="0"
+                    value="1"
+                >
+
+            </label>
+
+
+            <label>
+                Dining Tables
+
+                <input
+                    type="number"
+                    name="dining_tables"
+                    min="0"
+                    value="0"
+                >
+
+            </label>
+
+        </div>
+
+
+        <label>
+            Style / Additional Preferences
+
+            <textarea
+                name="preferences"
+                placeholder="Modern, minimal, wooden furniture, warm lighting..."
+            ></textarea>
+
+        </label>
+
+
+        <button
+            class="btn full"
+            type="submit"
+        >
+            Generate Recommendations ✦
+        </button>
+
+    </form>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,239 @@
+```jinja2
+{% extends "base.html" %}
+
+{% block title %}
+Recommendations · PocketSmart
+{% endblock %}
+
+{% block content %}
+
+<section class="planner-head">
+
+    <p class="eyebrow">
+        AI RECOMMENDATIONS
+    </p>
+
+    <h1>
+        {{ title }}
+    </h1>
+
+    <p class="muted">
+        {{ category }}
+        · Recommendation #{{ recommendation_id }}
+    </p>
+
+</section>
+
+
+<div class="summary">
+
+    <div>
+
+        <span>
+            Total Budget
+        </span>
+
+        <strong>
+            ₹{{ "%.2f"|format(result["total_budget"] or 0) }}
+        </strong>
+
+    </div>
+
+
+    <div>
+
+        <span>
+            Remaining Budget
+        </span>
+
+        <strong>
+            ₹{{ "%.2f"|format(result["remaining_budget"] or 0) }}
+        </strong>
+
+    </div>
+
+</div>
+
+
+{% if result["outfit_image"] %}
+
+<img
+    class="outfit"
+    src="{{ result["outfit_image"] }}"
+    alt="Uploaded outfit"
+>
+
+{% endif %}
+
+
+{% if result["outfit_analysis"] %}
+
+<div class="info">
+
+    <h3>
+        Outfit Analysis
+    </h3>
+
+    {% if result["outfit_analysis"]["note"] %}
+
+    <p>
+        {{ result["outfit_analysis"]["note"] }}
+    </p>
+
+    {% endif %}
+
+
+    <p>
+
+        {% if result["outfit_analysis"]["style"] %}
+
+        <b>Style:</b>
+        {{ result["outfit_analysis"]["style"] }}
+
+        {% endif %}
+
+
+        {% if result["outfit_analysis"]["colors"] %}
+
+        ·
+
+        <b>Colors:</b>
+
+        {{ result["outfit_analysis"]["colors"]|join(", ") }}
+
+        {% endif %}
+
+
+        {% if result["outfit_analysis"]["metal"] %}
+
+        ·
+
+        <b>Metal:</b>
+
+        {{ result["outfit_analysis"]["metal"] }}
+
+        {% endif %}
+
+    </p>
+
+</div>
+
+{% endif %}
+
+
+<div class="recommendations">
+
+{% for category_data in result["categories"] %}
+
+<section class="rec-card">
+
+    <div class="rec-head">
+
+        <h2>
+            {{ category_data["category"] }}
+        </h2>
+
+        <strong>
+            ₹{{ "%.2f"|format(category_data["allocation"] or 0) }}
+        </strong>
+
+    </div>
+
+
+    {% for item in category_data["items"] %}
+
+    <div class="item">
+
+        <div>
+
+            <h3>
+                {{ item["name"] }}
+            </h3>
+
+            <p>
+                {{ item["description"] }}
+            </p>
+
+            <span>
+                Qty:
+                {{ item["quantity"] }}
+                ·
+                ₹{{ "%.2f"|format(item["price"] or 0) }}
+            </span>
+
+        </div>
+
+
+        <div class="links">
+
+            {% for link in item["links"] %}
+
+            <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="{{ link["url"] }}"
+            >
+                {{ link["platform"] }}
+            </a>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+    {% endfor %}
+
+</section>
+
+{% endfor %}
+
+</div>
+
+
+{% if result["additional_suggestions"] %}
+
+<section class="info">
+
+    <h2>
+        Additional Suggestions
+    </h2>
+
+    <ul>
+
+        {% for suggestion in result["additional_suggestions"] %}
+
+        <li>
+            {{ suggestion }}
+        </li>
+
+        {% endfor %}
+
+    </ul>
+
+</section>
+
+{% endif %}
+
+
+<div class="actions">
+
+    <a
+        class="btn"
+        href="/dashboard"
+    >
+        Back to Dashboard
+    </a>
+
+
+    <a
+        class="btn secondary"
+        href="/history"
+    >
+        View History
+    </a>
+
+</div>
+
+{% endblock %}
+```

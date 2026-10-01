@@ -1,0 +1,198 @@
+{% extends "base.html" %}
+
+{% block title %}
+Party Planner · PocketSmart
+{% endblock %}
+
+{% block content %}
+
+<section class="planner-head">
+
+    <p class="eyebrow">
+        PARTY BUDGET PLANNER
+    </p>
+
+    <h1>
+        Plan Your Perfect Event
+    </h1>
+
+    <p class="muted">
+        Set your budget, guest count
+        and event requirements.
+    </p>
+
+</section>
+
+
+<div class="form-card">
+
+    {% if error %}
+
+    <div class="error">
+        {{ error }}
+    </div>
+
+    {% endif %}
+
+
+    <form
+        method="post"
+        action="/generate-party"
+    >
+
+        <div class="field-grid">
+
+            <label>
+                Total Budget ₹
+
+                <input
+                    type="number"
+                    name="budget"
+                    min="1"
+                    required
+                    placeholder="50000"
+                >
+
+            </label>
+
+
+            <label>
+                Number of Guests
+
+                <input
+                    type="number"
+                    name="guests"
+                    min="1"
+                    required
+                    placeholder="50"
+                >
+
+            </label>
+
+
+            <label>
+                Event Type
+
+                <select name="event_type">
+
+                    <option>
+                        Birthday
+                    </option>
+
+                    <option>
+                        Wedding
+                    </option>
+
+                    <option>
+                        Corporate
+                    </option>
+
+                    <option>
+                        Engagement
+                    </option>
+
+                    <option>
+                        Anniversary
+                    </option>
+
+                    <option>
+                        Other
+                    </option>
+
+                </select>
+
+            </label>
+
+
+            <label>
+                Venue Type
+
+                <select name="venue_type">
+
+                    <option>
+                        Hall
+                    </option>
+
+                    <option>
+                        Restaurant
+                    </option>
+
+                    <option>
+                        Outdoor
+                    </option>
+
+                    <option>
+                        Home
+                    </option>
+
+                    <option>
+                        Hotel
+                    </option>
+
+                </select>
+
+            </label>
+
+        </div>
+
+
+        <div class="checks">
+
+            <label>
+                <input
+                    type="checkbox"
+                    name="catering"
+                    checked
+                >
+
+                Catering
+            </label>
+
+
+            <label>
+                <input
+                    type="checkbox"
+                    name="decoration"
+                    checked
+                >
+
+                Decoration
+            </label>
+
+
+            <label>
+                <input
+                    type="checkbox"
+                    name="entertainment"
+                >
+
+                Entertainment
+            </label>
+
+        </div>
+
+
+        <label>
+
+            Additional Requirements
+
+            <textarea
+                name="requirements"
+                placeholder="Vegetarian food, theme, location preference, etc."
+            ></textarea>
+
+        </label>
+
+
+        <button
+            class="btn full"
+            type="submit"
+        >
+            Generate Budget Plan ✦
+        </button>
+
+    </form>
+
+</div>
+
+{% endblock %}

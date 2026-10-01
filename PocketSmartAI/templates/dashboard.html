@@ -1,0 +1,156 @@
+{% extends "base.html" %}
+
+{% block title %}
+Dashboard · PocketSmart
+{% endblock %}
+
+{% block content %}
+
+<section class="dashboard-head">
+
+    <p class="eyebrow">
+        YOUR DASHBOARD
+    </p>
+
+    <h1>
+        Welcome, {{ user.username }}!
+    </h1>
+
+    <p class="muted">
+        Choose a planner and create
+        your personalized budget plan.
+    </p>
+
+</section>
+
+
+<section class="grid three dashboard-cards">
+
+    <a
+        class="feature"
+        href="/home-planner"
+    >
+
+        <div class="icon">
+            ⌂
+        </div>
+
+        <h3>
+            Home Budget Planner
+        </h3>
+
+        <p>
+            Plan furniture, lighting,
+            fans and home decor.
+        </p>
+
+        <span class="btn small">
+            Start Planner
+        </span>
+
+    </a>
+
+
+    <a
+        class="feature"
+        href="/party-planner"
+    >
+
+        <div class="icon">
+            ◈
+        </div>
+
+        <h3>
+            Party Budget Planner
+        </h3>
+
+        <p>
+            Plan food, venue,
+            decoration and entertainment.
+        </p>
+
+        <span class="btn small">
+            Start Planner
+        </span>
+
+    </a>
+
+
+    <a
+        class="feature"
+        href="/jewelry-planner"
+    >
+
+        <div class="icon">
+            ◇
+        </div>
+
+        <h3>
+            Jewelry Budget Planner
+        </h3>
+
+        <p>
+            Get jewelry suggestions
+            based on occasion and style.
+        </p>
+
+        <span class="btn small">
+            Start Planner
+        </span>
+
+    </a>
+
+</section>
+
+
+<section class="history-box">
+
+    <div class="row-between">
+
+        <h2>
+            Recent Activity
+        </h2>
+
+        <a href="/history">
+            View All
+        </a>
+
+    </div>
+
+
+    {% if history %}
+
+        {% for item in history %}
+
+        <div class="activity">
+
+            <strong>
+                {{ item.category|title }}
+            </strong>
+
+            <small>
+                {{ item.created_at[:19] }}
+            </small>
+
+            <a
+                class="btn small"
+                href="/recommendations/{{ item.id }}"
+            >
+                View
+            </a>
+
+        </div>
+
+        {% endfor %}
+
+    {% else %}
+
+        <p class="muted">
+            No recommendations yet.
+        </p>
+
+    {% endif %}
+
+</section>
+
+{% endblock %}

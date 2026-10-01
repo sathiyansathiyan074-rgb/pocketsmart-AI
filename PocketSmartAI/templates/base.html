@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        {% block title %}
+        PocketSmart AI
+        {% endblock %}
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="/static/style.css"
+    >
+
+</head>
+
+<body>
+
+<nav class="nav">
+
+    <a
+        class="brand"
+        href="/"
+    >
+        Pocket<span>Smart</span>
+    </a>
+
+    <div>
+
+        {% if current_user %}
+
+            <a href="/dashboard">
+                Dashboard
+            </a>
+
+            <a href="/home-planner">
+                Home
+            </a>
+
+            <a href="/party-planner">
+                Party
+            </a>
+
+            <a href="/jewelry-planner">
+                Jewelry
+            </a>
+
+            <a href="/history">
+                History
+            </a>
+
+            <a
+                class="nav-btn"
+                href="/logout"
+            >
+                Logout
+            </a>
+
+        {% else %}
+
+            <a href="/login">
+                Sign In
+            </a>
+
+            <a
+                class="nav-btn"
+                href="/register"
+            >
+                Get Started
+            </a>
+
+        {% endif %}
+
+    </div>
+
+</nav>
+
+
+<main>
+
+{% block content %}
+
+{% endblock %}
+
+</main>
+
+
+<footer>
+    © 2026 PocketSmart AI
+    · Smart Budget Planning
+</footer>
+
+
+<script src="/static/app.js"></script>
+
+</body>
+
+</html>

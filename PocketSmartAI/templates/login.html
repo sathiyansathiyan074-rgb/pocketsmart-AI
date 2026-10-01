@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block title %}
+Login · PocketSmart
+{% endblock %}
+
+{% block content %}
+
+<div class="auth-wrap">
+
+    <div class="auth-card">
+
+        <p class="eyebrow">
+            POCKETSMART
+        </p>
+
+        <h1>
+            Welcome Back
+        </h1>
+
+
+        {% if registered %}
+
+        <div class="success">
+            Account created successfully.
+            Please sign in.
+        </div>
+
+        {% endif %}
+
+
+        {% if error %}
+
+        <div class="error">
+            {{ error }}
+        </div>
+
+        {% endif %}
+
+
+        <form method="post">
+
+            <label>
+                Username
+
+                <input
+                    type="text"
+                    name="username"
+                    required
+                    placeholder="Enter your username"
+                >
+
+            </label>
+
+
+            <label>
+                Password
+
+                <input
+                    type="password"
+                    name="password"
+                    required
+                    placeholder="Enter your password"
+                >
+
+            </label>
+
+
+            <button
+                class="btn full"
+                type="submit"
+            >
+                Sign In →
+            </button>
+
+        </form>
+
+
+        <p class="center">
+
+            Don't have an account?
+
+            <a href="/register">
+                Create Account
+            </a>
+
+        </p>
+
+    </div>
+
+</div>
+
+{% endblock %}
